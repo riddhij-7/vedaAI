@@ -1,7 +1,7 @@
 # VedaAI – AI Assessment Creator
 
-> Full-stack AI-powered question paper generator for teachers.  
-> Built for the VedaAI Full Stack Engineer hiring assignment.
+ Full-stack AI-powered question paper generator for teachers.  
+ Built for the VedaAI Full Stack Engineer hiring assignment.
 
 ---
 
@@ -12,12 +12,7 @@
 
 ## Flow
 
-1. Teacher fills the form → `POST /api/assignments` with `FormData`
-2. API creates MongoDB document (status: `queued`) → adds BullMQ job → returns `assignmentId`
-3. Frontend subscribes via WebSocket using `assignmentId`
-4. Worker processes job: builds structured prompt → calls Claude → parses JSON response
-5. Worker updates MongoDB (status: `done`, stores `paper`) → broadcasts via WebSocket
-6. Frontend receives result → navigates to `/assignments/:id`
+![Request Flow](docs/request_flow.png)
 
 ## Tech Stack
 
