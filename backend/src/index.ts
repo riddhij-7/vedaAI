@@ -5,6 +5,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import { wsManager } from './lib/ws';
 import assignmentsRouter from './routes/assignments';
+import './workers/assessment.worker';
 
 const app = express();
 const server = http.createServer(app);
