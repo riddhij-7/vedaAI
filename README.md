@@ -6,36 +6,9 @@
 ---
 
 ## Live Architecture
+![Architecture](docs/architecture.png)
 
-```
-┌─────────────────────────────────────────────────┐
-│                   Frontend (Next.js 14)          │
-│  /assignments        → Dashboard (empty / grid)  │
-│  /assignments/new    → Create Assignment form    │
-│  /assignments/[id]   → Generated exam paper      │
-│                                                  │
-│  Zustand store  ←──→  WebSocket hook             │
-└──────────────────────┬──────────────────────────┘
-                       │ HTTP + WebSocket
-┌──────────────────────▼──────────────────────────┐
-│                Backend (Express + TS)            │
-│  POST /api/assignments  → enqueue BullMQ job    │
-│  GET  /api/assignments  → list (MongoDB)        │
-│  GET  /api/assignments/:id → get (Redis cache)  │
-│  WS   /ws               → real-time updates    │
-└──────┬───────────────────────────────┬──────────┘
-       │ BullMQ                        │ WebSocket
-┌──────▼──────┐              ┌─────────▼──────────┐
-│    Redis    │              │   BullMQ Worker    │
-│  (job state │              │  LLM → parse JSON  │
-│  + cache)   │              │  → MongoDB → WS    │
-└─────────────┘              └────────────────────┘
-                                        │
-                               ┌────────▼────────┐
-                               │   Claude API    │
-                               │  (Sonnet 4)     │
-                               └─────────────────┘
-```
+---
 
 ## Flow
 
