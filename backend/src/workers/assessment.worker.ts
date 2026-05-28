@@ -1,7 +1,5 @@
 import 'dotenv/config';
-import http from 'http';
 import { Worker } from 'bullmq';
-import mongoose from 'mongoose';
 import { Assignment } from '../models/assignment.model';
 import { generatePaper } from '../services/llm.service';
 import { wsManager } from '../lib/ws';
@@ -14,13 +12,7 @@ const connection = {
 };
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/vedaai');
-  console.log('[worker] MongoDB connected');
-
-  // Worker needs its own WS server on a different port so it can broadcast
-  const server = http.createServer();
-  wsManager.init(server);
-  server.listen(4001, () => console.log('[worker] WS ready on port 4001'));
+  
 
   const worker = new Worker(
     QUEUE_NAME,
