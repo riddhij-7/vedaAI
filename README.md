@@ -12,7 +12,7 @@
 
 ## Flow
 
-![Request Flow](docs/request_flow.png)
+![Request Flow](docs/requestflow.png)
 
 ## Tech Stack
 
