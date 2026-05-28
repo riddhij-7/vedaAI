@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+.next/
+dist/
+
+# Environment files - NEVER commit these
+.env
+.env.local
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
