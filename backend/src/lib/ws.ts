@@ -4,14 +4,12 @@ import type { WSMessage } from '../types';
 
 class WSManager {
   private wss: WebSocketServer | null = null;
-  // assignmentId → set of sockets subscribed
   private subs = new Map<string, Set<WebSocket>>();
 
   init(server: import('http').Server) {
     this.wss = new WebSocketServer({ server, path: '/ws' });
 
     this.wss.on('connection', (ws: WebSocket, req: IncomingMessage) => {
-      // Client sends: { type: 'subscribe', assignmentId }
       ws.on('message', (raw) => {
         try {
           const msg = JSON.parse(raw.toString());

@@ -23,13 +23,13 @@ const AssignmentInputSchema = z.object({
   additionalInstructions: z.string().optional(),
 });
 
-// POST /api/assignments — create and queue
+
 router.post('/', upload.single('file'), async (req: Request, res: Response) => {
   try {
     const body = typeof req.body.data === 'string' ? JSON.parse(req.body.data) : req.body;
     const input = AssignmentInputSchema.parse(body);
 
-    // Extract text from uploaded file
+    
     if (req.file) {
       if (req.file.mimetype === 'application/pdf') {
         const parsed = await pdfParse(req.file.buffer);
@@ -50,13 +50,12 @@ router.post('/', upload.single('file'), async (req: Request, res: Response) => {
   }
 });
 
-// GET /api/assignments — list all
 router.get('/', async (_req: Request, res: Response) => {
   const assignments = await Assignment.find({}, { paper: 0 }).sort({ createdAt: -1 }).lean();
   res.json(assignments);
 });
 
-// GET /api/assignments/:id — single with result (cached)
+
 router.get('/:id', async (req: Request, res: Response) => {
   const cacheKey = `assignment:${req.params.id}`;
   const cached = await redis.get(cacheKey);
@@ -72,7 +71,6 @@ router.get('/:id', async (req: Request, res: Response) => {
   res.json(assignment);
 });
 
-// DELETE /api/assignments/:id
 router.delete('/:id', async (req: Request, res: Response) => {
   await Assignment.findByIdAndDelete(req.params.id);
   await redis.del(`assignment:${req.params.id}`);

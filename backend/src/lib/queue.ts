@@ -3,10 +3,8 @@ import IORedis from 'ioredis';
 
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 
-// Plain connection options – BullMQ uses its own bundled ioredis internally
 const connection = { url: redisUrl, maxRetriesPerRequest: null as unknown as number };
 
-// Shared ioredis client for caching (non-BullMQ use)
 export const redis = new IORedis(redisUrl, { maxRetriesPerRequest: null });
 
 export const QUEUE_NAME = 'assessment-generation';

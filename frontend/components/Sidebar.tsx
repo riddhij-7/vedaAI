@@ -124,7 +124,7 @@ export default function Sidebar() {
         </div>
       </aside>
 
-      {/* ── MOBILE TOPBAR ── */}
+      {/*  MOBILE TOPBAR */}
       <div className="mobile-topbar" style={{
         display: 'none', position: 'fixed', top: 0, left: 0, right: 0,
         height: 56, background: 'white', zIndex: 50,
@@ -182,7 +182,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* ── MOBILE SLIDE-OUT MENU ── */}
+      {/* MOBILE SLIDE-OUT MENU */}
       {mobileMenuOpen && (
         <div style={{
           position: 'fixed', inset: 0, zIndex: 200,
@@ -234,7 +234,7 @@ export default function Sidebar() {
         </div>
       )}
 
-      {/* ── MOBILE BOTTOM NAV ── */}
+      {/* MOBILE BOTTOM NAV  */}
       <nav className="mobile-bottom-nav" style={{
             display: 'none', position: 'fixed', bottom: 16, left: 16, right: 16,
             height: 60, background: '#111827', zIndex: 50,
@@ -256,7 +256,7 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* ── RESPONSIVE CSS ── */}
+      {/* RESPONSIVE CSS */}
       <style>{`
         @media (max-width: 768px) {
           .desktop-sidebar { display: none !important; }

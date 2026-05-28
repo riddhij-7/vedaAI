@@ -30,13 +30,13 @@ export function useAssignmentSocket(assignmentId: string | null) {
           setProgress(0, 'failed');
         }
       } catch {}
-    }, 2000); // poll every 2 seconds
+    }, 2000); 
   };
 
   useEffect(() => {
     if (!assignmentId) return;
 
-    // Try WebSocket first
+  
     try {
       const ws = new WebSocket(WS_URL);
       wsRef.current = ws;
@@ -57,8 +57,6 @@ export function useAssignmentSocket(assignmentId: string | null) {
         }
         if (msg.type === 'error') setProgress(0, 'failed');
       };
-
-      // If WS fails to connect, fall back to polling
       ws.onerror = () => startPolling(assignmentId);
       ws.onclose = () => {
         if (pollRef.current === null) startPolling(assignmentId);
@@ -67,7 +65,7 @@ export function useAssignmentSocket(assignmentId: string | null) {
       startPolling(assignmentId);
     }
 
-    // Always start polling as safety net
+    
     startPolling(assignmentId);
 
     return () => {
